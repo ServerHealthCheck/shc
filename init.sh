@@ -40,6 +40,6 @@ mv *.sh $script_path
 echo "
 Moving $site_name into apache2 default place (needs sudo)
 "
-sudo mv $site_name.php /srv/www/htdocs/
+sudo mv $site_name /srv/www/htdocs/
 
  
