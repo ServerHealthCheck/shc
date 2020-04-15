@@ -30,7 +30,7 @@ fi
 echo "
 Moving scripts into $folder_path
 "
-mv *.sh $script_path
+mv *.sh $folder_path
 
 #move index file into correct place
 echo "
