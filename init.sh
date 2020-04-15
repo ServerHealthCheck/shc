@@ -9,7 +9,7 @@
 user="$USER"
 site_name="index.php"
 folder_name="shc_scripts"
-folder_path="/home/$user/$script_name"
+folder_path="/home/$user/$folder_name"
 
 #functions
 #generate folder for the scripts, if not already generated
