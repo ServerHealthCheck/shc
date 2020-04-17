@@ -1,2 +1,2 @@
 #!/bin/bash
-HOST= hostname
+hostname
