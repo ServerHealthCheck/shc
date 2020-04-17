@@ -26,7 +26,8 @@ body {
 
 <h2>System</h2>
 <?php
-	$directory = "/home/$USER/shc_scripts/";
+	$USER = get_current_user();
+	$directory = ("/home/$USER/shc_scripts/");
 	$ds_used = shell_exec("$directory/storageused.sh");
 	$ds_total = shell_exec("$directory/storage.sh");
 	$cpu_temp = shell_exec("$directory/temp.sh");
@@ -74,7 +75,8 @@ body {
 <br>
 <h2>Services</h2> 
 <?php
-	$directory = shell_exec("/home/$USER/shc_scripts/");
+	$USER = get_current_user();
+	$directory = ("/home/$USER/shc_scripts/");
 	$bluetooth = shell_exec("$directory/bluetooth_active.sh");
 	$sshd = shell_exec("$directory/sshd_active.sh");
 ?>
