@@ -48,8 +48,9 @@ Moving $site_name into apache2 default place (needs sudo)
 sudo cp $site_name /srv/www/htdocs/
 
 echo "
-Now you can access the apachesite by typing http://localhost
-For any help consult the Readme"
+You can now access the site by typing the ip into the url field in your browser.
+For any help, please consult the Readme or open a new issue.
+"
 }
 
 folder_check
