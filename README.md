@@ -29,5 +29,10 @@
   
             sudo systemctl restart apache2.service
             
-           
+  Execute the init.sh by typing
+   
+            bash init.sh
+  
+  The script now prepares everything.
+  You will be asked to type in your sudo password, because the index.php file needs to be moved into /srv/www/htdocs (default apache folder location)
          
