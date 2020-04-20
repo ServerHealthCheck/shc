@@ -6,6 +6,17 @@
   
             git clone https://github.com/junglert/ServerHealthCheck.git
             
+  Edit the /etc/apache2/httpd.conf
+  Go to the following line
+  
+          # List of resources to look for when the client requests a directory
+                    DirectoryIndex index.html index.html.var
+  
+  Add index.php
+  
+           # List of resources to look for when the client requests a directory
+                    DirectoryIndex index.php index.html index.html.var
+
   Make sure you got the apache2 module for php parsing
   
             apache2-mod_php7
