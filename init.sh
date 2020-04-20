@@ -9,35 +9,48 @@
 user="$USER"
 site_name="index.php"
 folder_name="shc_scripts"
-folder_path="/home/$user/$folder_name"
+home_path="$HOME"
+final_path="$home_path/$folder_name"
 
 #functions
 #generate folder for the scripts, if not already generated
+folder_check(){
 echo "
 Initial check if folder $folder_name exists
 "
-if [ -d "$folder_path" ];
+if [ -d "$final_path" ];
     then
             echo -e "Folder already exists \e[32m\u2714 \e[39m
             "
     else
             echo "Creating $folder_name folder in /home/$user/
             "
-            mkdir /home/$user/$folder_name
+            mkdir ${final_path}
 fi
+}
 
 #move scripts into folder
+script_move(){
 echo "
-Moving scripts into $folder_path
+Moving scripts into $final_path
 "
-mv *.sh $folder_path
+cd shc_scripts/
+cp *.sh $final_path
+}
+
 
 #move index file into correct place
+index_move(){
 echo "
 Moving $site_name into apache2 default place (needs sudo)
 "
-sudo mv $site_name /srv/www/htdocs/
+sudo cp $site_name /srv/www/htdocs/
 
 echo "
 Now you can access the apachesite by typing http://localhost
 For any help consult the Readme"
+}
+
+folder_check
+script_move
+index_move
