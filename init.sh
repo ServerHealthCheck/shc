@@ -36,6 +36,7 @@ Moving scripts into $final_path
 "
 cd shc_scripts/
 cp *.sh $final_path
+cd ..
 }
 
 
