@@ -13,8 +13,7 @@ home_path="$HOME"
 final_path="$home_path/$folder_name"
 
 #functions
-#generate folder for the scripts, if not already generated
-folder_check(){
+folder_check(){ #generate folder for the scripts, if not already generated
 echo "
 Initial check if folder $folder_name exists
 "
@@ -29,8 +28,7 @@ if [ -d "$final_path" ];
 fi
 }
 
-#move scripts into folder
-script_move(){
+script_move(){ #move scripts into folder
 echo "
 Moving scripts into $final_path
 "
@@ -39,9 +37,7 @@ cp *.sh $final_path
 cd ..
 }
 
-
-#move index file into correct place
-index_move(){
+index_move(){ #move index file into correct place
 echo "
 Moving $site_name into apache2 default place (needs sudo)
 "
