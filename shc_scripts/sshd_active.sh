@@ -1,6 +1,5 @@
 #!/bin/bash
-SERVICE=sshd
-systemctl status $SERVICE > /dev/null
+systemctl status sshd > /dev/null
 if [ $? -ne 0 ]
 then
 	echo "not active"
