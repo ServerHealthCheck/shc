@@ -19,7 +19,7 @@ Initial check if folder $folder_name exists
 "
 if [ -d "$final_path" ];
     then
-            echo -e "Folder already exists \e[32m\u2714 \e[39m
+            echo "Folder already exists
             "
     else
             echo "Creating $folder_name folder in /home/$user/
