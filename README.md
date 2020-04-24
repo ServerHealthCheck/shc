@@ -23,7 +23,7 @@
      
   Install this module and activate it by typing
   
-            sudo a2enmod php
+            sudo a2enmod php7
             
   Restart the apache2 service
   
