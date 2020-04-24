@@ -43,7 +43,7 @@ echo "
 Moving $site_name into apache2 default place (needs sudo)
 "
 sudo cp $site_name /$index_path/
-sudo chown $user:users $index_path/index
+sudo chown $user:users $index_path/$site_name
 
 echo "
 You can now access the site by typing the ip into the url field in your browser.
