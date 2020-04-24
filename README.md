@@ -39,7 +39,7 @@
   
   # Possible errors
 
-   - 
+   - file is not getting compiled --> check if you have php7 installed on your host
      
  
 # Future updates
