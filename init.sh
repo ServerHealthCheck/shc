@@ -11,6 +11,7 @@ site_name="index.php"
 folder_name="shc_scripts"
 home_path="$HOME"
 final_path="$home_path/$folder_name"
+index_path="/srv/www/htdocs"
 
 #functions
 folder_check(){ #generate folder for the scripts, if not already generated
@@ -41,7 +42,8 @@ index_move(){ #move index file into correct place
 echo "
 Moving $site_name into apache2 default place (needs sudo)
 "
-sudo cp $site_name /srv/www/htdocs/
+sudo cp $site_name /$index_path/
+sudo chown $user:users $index_path/index
 
 echo "
 You can now access the site by typing the ip into the url field in your browser.
