@@ -45,7 +45,7 @@
   
       127.0.1.1 localost.localdomain localhost $your_prefered_name
   
-  Add both of your domain-hostnames to the index.php file you find in /srv/www/htdocs/
+  Add both of your domain-hostnames to the index.php file you find in /srv/www/htdocs/ behind the "http://" tag
   
       <ul>	
 	       <li style="float:left"><a href="http://">Host</a></li> <?php //Add your own host http://hostname_host/ ?>
