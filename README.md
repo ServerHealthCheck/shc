@@ -1,6 +1,6 @@
 # ServerHealthCheck
 
-# How to install and get started
+# How to install on server
   
   Clone this git-repo: 
   
@@ -37,12 +37,18 @@
   
   You will be asked to type in your sudo password, because the index.php file needs to be moved into /srv/www/htdocs (default apache folder location)
   
+  # If you want to use Host/Client functions
+  
+  
+  
+  
   # Possible errors
 
-   - file is not getting compiled --> check if you have php7 installed on your host
+   - file is not getting compiled --> check if you have php7 installed on your host or client
    
       
 # Future updates
+   - Host and client
    
    - More services
    
