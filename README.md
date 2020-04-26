@@ -52,6 +52,8 @@
 	       <li style="float:center"><a href="http://">RemoteClient</a></li> <?php //Add your own client http://hostname_client/ ?>
       </ul>
       
+   Install this git and exec the init.sh
+      
   # Possible errors
 
    - file is not getting compiled --> check if you have php7 installed on your host or client
