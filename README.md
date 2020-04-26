@@ -45,7 +45,7 @@
   
       127.0.1.1 localost.localdomain localhost $your_prefered_name
   
-  
+  Add both of your 
   # Possible errors
 
    - file is not getting compiled --> check if you have php7 installed on your host or client
