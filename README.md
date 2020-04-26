@@ -39,7 +39,11 @@
   
   # If you want to use Host/Client functions
   
+  Edit the /etc/hosts file of your client
   
+  Add the following line beneath the localhost line
+  
+      127.0.1.1 localost.localdomain localhost $your_prefered_name
   
   
   # Possible errors
