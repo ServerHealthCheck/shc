@@ -45,7 +45,13 @@
   
       127.0.1.1 localost.localdomain localhost $your_prefered_name
   
-  Add both of your 
+  Add both of your domain-hostnames to the index.php file you find in /srv/www/htdocs/
+  
+      <ul>	
+	       <li style="float:left"><a href="http://">Host</a></li> <?php //Add your own host http://hostname_host/ ?>
+	       <li style="float:center"><a href="http://">RemoteClient</a></li> <?php //Add your own client http://hostname_client/ ?>
+      </ul>
+      
   # Possible errors
 
    - file is not getting compiled --> check if you have php7 installed on your host or client
