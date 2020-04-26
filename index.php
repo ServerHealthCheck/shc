@@ -20,7 +20,6 @@ body {
 	font-family: arial;
 }
 
-
 ul {
 	list-style-type: none;
 	margin: 0;
@@ -117,6 +116,7 @@ li a:hover:not(.active) {
 	$bluetooth = shell_exec("$directory/bluetooth_active.sh");
 	$sshd = shell_exec("$directory/sshd_active.sh");
 ?>
+	
 <html>
 <table>
 	<tr>
