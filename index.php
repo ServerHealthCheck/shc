@@ -20,8 +20,41 @@ body {
 	font-family: arial;
 }
 
+
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #111;
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0;
+	font: 40px arial;
+}
+
+li {
+	float: left;
+}
+
+li a {
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+
+li a:hover:not(.active) {
+	background-color: #111;
+}
+
+.active {
+	background-color: ;
+}
 </style>
 </head>
+	
 <body>
 <ul>	
 	<li style="float:left"><a href="http://">Host</a></li> <?php //Add your own host http://hostname_host/ ?>
