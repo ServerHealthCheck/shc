@@ -24,8 +24,8 @@ body {
 </head>
 <body>
 <ul>	
-	<li style="float:left"><a href="http://">Host</a></li> //Add your own host http://hostname_host/
-	<li style="float:center"><a href="http://">RemoteClient</a></li> //Add your own client http://hostname_client/
+	<li style="float:left"><a href="http://">Host</a></li> <?php //Add your own host http://hostname_host/ ?>
+	<li style="float:center"><a href="http://">RemoteClient</a></li> <?php //Add your own client http://hostname_client/ ?>
 </ul>
 	
 <h2>System</h2>
