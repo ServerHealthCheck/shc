@@ -73,6 +73,7 @@ li a:hover:not(.active) {
 	$hostname = shell_exec("$directory/hostname.sh");
 	$os = shell_exec("$directory/os.sh");
 	$kernel = shell_exec("$directory/kevers.sh");
+	$ds_percent = shell_exec("$directory/diskusage.sh");
 ?>
 
 <html>
@@ -90,7 +91,7 @@ li a:hover:not(.active) {
 		<td><?php echo $kernel; ?></td>
 	</tr>
 	<tr>
-		<td>IP Address</td>
+		<td>IP Address/es</td>
 		<td><?php echo $ip; ?></td>
 	</tr>
 	<tr>
@@ -105,6 +106,10 @@ li a:hover:not(.active) {
 		<td>Disk Usage</td>
 		<td><?php echo $ds_used; echo "GB of "; echo $ds_total; echo "GB" ?></td>
 	</tr>	
+	<tr>
+		<td>Disk Usage in Percent</td>
+		<td><?php echo $ds_percent; echo "%" ?></td>
+	</tr>
 </table>
 </html>
 
