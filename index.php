@@ -64,16 +64,16 @@ li a:hover:not(.active) {
 <?php
 	$USER = get_current_user();
 	$directory = ("/home/$USER/shc_scripts/");
-	$ds_used = shell_exec("$directory/storageused.sh");
-	$ds_total = shell_exec("$directory/storage.sh");
+	$ds_used = shell_exec("$directory/storage_used.sh");
+	$ds_total = shell_exec("$directory/storage_total.sh");
 	$cpu_temp = shell_exec("$directory/temp.sh");
-	$ram_free = shell_exec("$directory/meminfo.sh");
-	$ram_total = shell_exec("$directory/memtotal.sh");
+	$ram_free = shell_exec("$directory/mem_used.sh");
+	$ram_total = shell_exec("$directory/mem_total.sh");
 	$ip = shell_exec("$directory/ip.sh");
 	$hostname = shell_exec("$directory/hostname.sh");
 	$os = shell_exec("$directory/os.sh");
-	$kernel = shell_exec("$directory/kevers.sh");
-	$ds_percent = shell_exec("$directory/diskusage.sh");
+	$kernel = shell_exec("$directory/kernel_version.sh");
+	$ds_percent = shell_exec("$directory/storage_percentage.sh");
 ?>
 
 <html>
