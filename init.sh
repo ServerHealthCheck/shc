@@ -1,7 +1,7 @@
 #!/bin/bash
 #author: junglert
 #mail:
-#date: 15.04.2020
+#date: 04.08.2020
 #license: GPL-3.0
 #summary: bash script that places the index.php and the scripts in the correct places
 
@@ -12,44 +12,114 @@ folder_name="shc_scripts"
 home_path="$HOME"
 final_path="$home_path/$folder_name"
 index_path="/srv/www/htdocs"
+splitter="-------------------------------------------------"
+package=$(cat /etc/os-release | grep PRETTY_NAME= | cut -d'"' -f2 | head -1)
+ip=$(ip a | grep inet | cut -d't' -f2 | grep 192 | cut -d' ' -f2 | cut -d'/' -f1)
+
 
 #functions
+root_check(){ #check if logged in as user root
+if [ $USER == "root" ]
+	then
+		echo "Change to another user, dont use root
+		"
+		sleep 10
+		exit
+fi
+}
+
+installed_check(){ #check if apache and moudle are installed
+echo "Checking if apache2 and apache2-mod_php7 are installed
+"
+case "$package" in
+	"openSUSE Tumbleweed" | "openSUSE Leap 15.1")
+		zypper se apache2 apache2-mod_php7 &> /dev/null
+
+		if [ $? -ne 0 ]
+		then
+			echo "installing apache2 and php7 module"
+			sudo zypper install -y apache2 apache2-mod_php7
+		else
+			echo "apache2 and php7 module are already installed
+			"
+		fi	
+	;;
+
+	"RedHat" | "Fedora" | "CentOS")
+		sudo yum install -y apache2 apache2-mod_php7
+	;;
+
+	"Arch")
+		sudo pacman -S apache2 apache2-mod_php7
+	;;
+
+	"Debian")
+		sudo apt-get intsall -y apache2 apache2-mod_php7
+	;;
+
+	*)
+		echo "Cant find any suitable OS"
+	;;
+esac
+}
+
 folder_check(){ #generate folder for the scripts, if not already generated
-echo "
-Initial check if folder $folder_name exists
+echo "Initial check if folder $folder_name exists
 "
 if [ -d "$final_path" ];
-    then
-            echo "Folder already exists
-            "
-    else
-            echo "Creating $folder_name folder in /home/$user/
-            "
-            mkdir ${final_path}
+	then
+		echo "Folder exists
+            	"
+	else
+        	echo "Creating $folder_name folder in /home/$user/
+            	"
+            	mkdir ${final_path}
 fi
 }
 
 script_move(){ #move scripts into folder
-echo "
-Moving scripts into $final_path
+echo "Moving scripts into $final_path
 "
 cd shc_scripts/
 cp *.sh $final_path
 cd ..
+echo "Files moved successfully
+"
 }
 
 index_move(){ #move index file into correct place
-echo "
-Moving $site_name into apache2 default place (needs sudo)
+echo "Moving $site_name into apache2 default place (needs sudo)
 "
 sudo cp $site_name /$index_path/
 sudo chown $user:users $index_path/$site_name
-echo "
-You can now access the site by typing the ip into the url field in your browser.
-For any help, please consult the Readme or open a new issue.
+echo "Index file moved to $index_path/$site_name
 "
 }
 
+module_activation(){ #activate php module
+echo "Starting apache2.service and php7 module
+"
+sudo systemctl enable --now apache2.service
+sudo a2enmod php7
+echo " "
+}
+
+splitter(){
+echo $splitter
+}
+
+root_check
+splitter
+installed_check
+splitter
+module_activation
+splitter
 folder_check
+splitter
 script_move
+splitter
 index_move
+splitter
+echo "Connect to $ip via your webbrowser
+"
+splitter
