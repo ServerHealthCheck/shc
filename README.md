@@ -17,17 +17,6 @@
            # List of resources to look for when the client requests a directory
                     DirectoryIndex index.php index.html index.html.var
 
-  Make sure you got the apache2 module for php parsing
-  
-            apache2-mod_php7
-     
-  Install this module and activate it by typing
-  
-            sudo a2enmod php7
-            
-  Restart the apache2 service
-  
-            sudo systemctl restart apache2.service
             
   Execute the init.sh by typing
    
