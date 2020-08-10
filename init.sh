@@ -33,7 +33,7 @@ echo "Checking if apache2 and apache2-mod_php7 are installed
 "
 case "$package" in
 	"openSUSE Tumbleweed" | "openSUSE Leap 15.1")
-		zypper se -i apache2 apache2-mod_php7 &> /dev/null
+		zypper se -i apache2 apache2-mod_php7 > /dev/null
 
 		if [ $? -ne 0 ]
 		then
