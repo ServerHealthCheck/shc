@@ -54,7 +54,7 @@ case "$package" in
 	;;
 
 	"debian")
-		sudo apt-get intsall -y apache2 apache2-mod_php7
+		sudo apt-get install -y apache2 apache2-mod_php7
 	;;
 
 	*)
