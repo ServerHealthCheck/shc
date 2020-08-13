@@ -4,7 +4,7 @@
   
   Clone this git-repo: 
   
-            git clone https://github.com/junglert/ServerHealthCheck.git
+            git clone https://github.com/junglert/shc.git
             
   Edit the /etc/apache2/httpd.conf
   Go to the following line
