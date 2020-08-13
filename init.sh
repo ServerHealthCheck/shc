@@ -13,7 +13,7 @@ home_path="$HOME"
 final_path="$home_path/$folder_name"
 index_path="/srv/www/htdocs"
 splitter="-------------------------------------------------"
-package=$(cat /etc/os-release | grep PRETTY_NAME= | cut -d'"' -f2 | head -1)
+package=$(cat /etc/os-release | grep ID_LIKE= | cut -d'"' -f2)
 ip=$(ip a | grep inet | cut -d't' -f2 | grep 192 | cut -d' ' -f2 | cut -d'/' -f1)
 
 
@@ -32,7 +32,7 @@ installed_check(){ #check if apache and moudle are installed
 echo "Checking if apache2 and apache2-mod_php7 are installed
 "
 case "$package" in
-	"openSUSE Tumbleweed" | "openSUSE Leap 15.1")
+	"suse opensuse" | "opensuse suse")
 		zypper se -i apache2 apache2-mod_php7 > /dev/null
 
 		if [ $? -ne 0 ]
@@ -45,15 +45,15 @@ case "$package" in
 		fi	
 	;;
 
-	"RedHat" | "Fedora" | "CentOS")
+	"redhat" | "fedora" | "centos")
 		sudo yum install -y apache2 apache2-mod_php7
 	;;
 
-	"Arch")
+	"arch")
 		sudo pacman -S apache2 apache2-mod_php7
 	;;
 
-	"Debian")
+	"debian")
 		sudo apt-get intsall -y apache2 apache2-mod_php7
 	;;
 
