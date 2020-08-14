@@ -90,7 +90,7 @@ echo "Files moved successfully
 index_move(){ #move index file into correct place
 echo "Moving $site_name into apache2 default place (needs sudo)
 "
-sudo cp $site_name /$index_path/
+sudo cp $site_name $index_path/
 sudo chown $user:users $index_path/$site_name
 echo "Index file moved to $index_path/$site_name
 "
