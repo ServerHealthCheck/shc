@@ -13,7 +13,7 @@ home_path="$HOME"
 final_path="$home_path/$folder_name"
 index_path="/srv/www/htdocs"
 splitter="-------------------------------------------------"
-package=$(cat /etc/os-release | grep ID_LIKE= | cut -d'"' -f2)
+package=$(grep ID_LIKE= /etc/os-release | cut -d'=' -f2 | head -1 | sed 's/"//g')
 ip=$(ip a | grep inet | cut -d't' -f2 | grep 192 | cut -d' ' -f2 | cut -d'/' -f1)
 
 
