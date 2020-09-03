@@ -1,2 +1,2 @@
 #!/bin/bash
-echo $(( $(cat /sys/class/thermal/thermal_zone6/temp) /1000))
+echo $(( $(cat /sys/class/thermal/thermal_zone*/temp) /1000))
