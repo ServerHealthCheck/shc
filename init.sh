@@ -12,6 +12,7 @@ folder_name="shc_scripts"
 home_path="$HOME"
 final_path="$home_path/$folder_name"
 index_path="/srv/www/htdocs"
+index_path_debian="/var/www/html"
 splitter="-------------------------------------------------"
 package=$(grep ID_LIKE= /etc/os-release | cut -d'=' -f2 | head -1 | sed 's/"//g')
 ip=$(ip a | grep inet | cut -d't' -f2 | grep 192 | cut -d' ' -f2 | cut -d'/' -f1)
@@ -90,10 +91,39 @@ echo "Files moved successfully
 index_move(){ #move index file into correct place
 echo "Moving $site_name into apache2 default place (needs sudo)
 "
-sudo cp $site_name $index_path/
-sudo chown $user:users $index_path/$site_name
-echo "Index file moved to $index_path/$site_name
-"
+case "$package" in
+	"suse opensuse" | "opensuse suse")
+		sudo cp $site_name $index_path/
+		sudo chown $user:users $index_path/$site_name
+		echo "Index file moved to $index_path/$site_name
+		"
+	;;
+
+	"redhat" | "fedora" | "centos")
+		sudo cp $site_name $index_path/
+		sudo chown $user:users $index_path/$site_name
+		echo "Index file moved to $index_path/$site_name
+		"
+	;;
+
+	"arch")
+		sudo cp $site_name $index_path/
+		sudo chown $user:users $index_path/$site_name
+		echo "Index file moved to $index_path/$site_name
+		"
+	;;
+
+	"debian" | "ubuntu")
+		sudo cp $site_name $index_path_debian/
+		sudo chown $user:users $index_path_debian/$site_name
+		echo "Index file moved to $index_path_debian/$site_name
+		"
+	;;
+
+	*)
+		echo "Cant find any suitable OS"
+	;;
+esac
 }
 
 module_activation(){ #activate php module
