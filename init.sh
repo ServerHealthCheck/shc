@@ -53,7 +53,7 @@ case "$package" in
 		sudo pacman -S apache2 apache2-mod_php7
 	;;
 
-	"debian")
+	"debian" | "ubuntu")
 		sudo apt-get install -y apache2 apache2-mod_php7
 	;;
 
