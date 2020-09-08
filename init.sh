@@ -54,7 +54,7 @@ case "$package" in
 	;;
 
 	"debian" | "ubuntu")
-		sudo apt-get install -y apache2 libapache-mod-php
+		sudo apt-get install -y apache2 libapache2-mod-php
 	;;
 
 	*)
