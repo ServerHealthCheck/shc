@@ -1,2 +1,4 @@
 #!/bin/bash
-df -h | awk '{print $5}' | grep % | grep -v Use | sort -n | tail -1 | cut -d "%" -f1 
+storage_used=$(bash $HOME/shc_scripts/storage_used.sh)
+storage_total=$(bash $HOME/shc_scripts/storage_total.sh)
+echo $(( (storage_used*100)/storage_total ))                                            
