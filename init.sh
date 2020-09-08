@@ -113,7 +113,7 @@ case "$package" in
 		"
 	;;
 
-	"debian" | "ubuntu")
+	"debian")
 		sudo cp $site_name $index_path_debian/
 		sudo chown $user:users $index_path_debian/$site_name
 		echo "Index file moved to $index_path_debian/$site_name
