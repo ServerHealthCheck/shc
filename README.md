@@ -1,10 +1,14 @@
 # ServerHealthCheck
+[![made-with-bash](https://img.shields.io/badge/Made%20with-Bash-1f425f.svg)](https://www.gnu.org/software/bash/)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![GitHub contributors](https://img.shields.io/github/contributors/Naereen/StrapDown.js.svg)](https://github.com/junglert/shc/graphs/contributors)
+[![GitHub version](https://badge.fury.io/gh/Naereen%2FStrapDown.js.svg)](https://github.com/junglert/shc/releases/tag/shc_v3.1)
 
 # How to install on server
   
   Clone this git-repo: 
   
-            git clone https://github.com/junglert/ServerHealthCheck.git
+            git clone https://github.com/junglert/shc.git
             
   Edit the /etc/apache2/httpd.conf
   Go to the following line
@@ -17,17 +21,6 @@
            # List of resources to look for when the client requests a directory
                     DirectoryIndex index.php index.html index.html.var
 
-  Make sure you got the apache2 module for php parsing
-  
-            apache2-mod_php7
-     
-  Install this module and activate it by typing
-  
-            sudo a2enmod php7
-            
-  Restart the apache2 service
-  
-            sudo systemctl restart apache2.service
             
   Execute the init.sh by typing
    

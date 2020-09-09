@@ -12,8 +12,9 @@ folder_name="shc_scripts"
 home_path="$HOME"
 final_path="$home_path/$folder_name"
 index_path="/srv/www/htdocs"
+index_path_debian="/var/www/html"
 splitter="-------------------------------------------------"
-package=$(cat /etc/os-release | grep PRETTY_NAME= | cut -d'"' -f2 | head -1)
+package=$(grep ID_LIKE= /etc/os-release | cut -d'=' -f2 | head -1 | sed 's/"//g')
 ip=$(ip a | grep inet | cut -d't' -f2 | grep 192 | cut -d' ' -f2 | cut -d'/' -f1)
 
 
@@ -32,8 +33,8 @@ installed_check(){ #check if apache and moudle are installed
 echo "Checking if apache2 and apache2-mod_php7 are installed
 "
 case "$package" in
-	"openSUSE Tumbleweed" | "openSUSE Leap 15.1")
-		zypper se apache2 apache2-mod_php7 &> /dev/null
+	"suse opensuse" | "opensuse suse")
+		zypper se -i apache2 apache2-mod_php7 > /dev/null
 
 		if [ $? -ne 0 ]
 		then
@@ -45,16 +46,16 @@ case "$package" in
 		fi	
 	;;
 
-	"RedHat" | "Fedora" | "CentOS")
+	"redhat" | "fedora" | "centos")
 		sudo yum install -y apache2 apache2-mod_php7
 	;;
 
-	"Arch")
+	"arch")
 		sudo pacman -S apache2 apache2-mod_php7
 	;;
 
-	"Debian")
-		sudo apt-get intsall -y apache2 apache2-mod_php7
+	"debian" | "ubuntu")
+		sudo apt-get install -y apache2 libapache2-mod-php
 	;;
 
 	*)
@@ -90,17 +91,46 @@ echo "Files moved successfully
 index_move(){ #move index file into correct place
 echo "Moving $site_name into apache2 default place (needs sudo)
 "
-sudo cp $site_name /$index_path/
-sudo chown $user:users $index_path/$site_name
-echo "Index file moved to $index_path/$site_name
-"
+case "$package" in
+	"suse opensuse" | "opensuse suse")
+		sudo cp $site_name $index_path/
+		sudo chown $user:users $index_path/$site_name
+		echo "Index file moved to $index_path/$site_name
+		"
+	;;
+
+	"redhat" | "fedora" | "centos")
+		sudo cp $site_name $index_path/
+		sudo chown $user:users $index_path/$site_name
+		echo "Index file moved to $index_path/$site_name
+		"
+	;;
+
+	"arch")
+		sudo cp $site_name $index_path/
+		sudo chown $user:users $index_path/$site_name
+		echo "Index file moved to $index_path/$site_name
+		"
+	;;
+
+	"debian")
+		sudo cp $site_name $index_path_debian/
+		sudo chown $user:users $index_path_debian/$site_name
+		echo "Index file moved to $index_path_debian/$site_name
+		"
+	;;
+
+	*)
+		echo "Cant find any suitable OS"
+	;;
+esac
 }
 
 module_activation(){ #activate php module
 echo "Starting apache2.service and php7 module
 "
 sudo systemctl enable --now apache2.service
-sudo a2enmod php7
+sudo a2enmod php7.4
 echo " "
 }
 
