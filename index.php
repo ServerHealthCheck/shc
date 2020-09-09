@@ -73,7 +73,6 @@ li a:hover:not(.active) {
 	$hostname = shell_exec("$directory/hostname.sh");
 	$os = shell_exec("$directory/os.sh");
 	$kernel = shell_exec("$directory/kernel_version.sh");
-	$ds_percent = shell_exec("$directory/storage_percentage.sh");
 ?>
 
 <html>
@@ -106,10 +105,6 @@ li a:hover:not(.active) {
 		<td>Disk Usage</td>
 		<td><?php echo $ds_used; echo "GB of "; echo $ds_total; echo "GB" ?></td>
 	</tr>	
-	<tr>
-		<td>Disk Usage in Percent</td>
-		<td><?php echo $ds_percent; echo "%" ?></td>
-	</tr>
 </table>
 </html>
 
