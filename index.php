@@ -108,7 +108,7 @@ li a:hover:not(.active) {
 	</tr>
 	<tr>
 		<td>Uptime</td>
-		<td><?php echo $uptime?></td>
+		<td><?php echo $uptime; ?></td>
 	</tr>	
 </table>
 </html>
