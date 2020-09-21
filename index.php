@@ -73,6 +73,7 @@ li a:hover:not(.active) {
 	$hostname = shell_exec("$directory/hostname.sh");
 	$os = shell_exec("$directory/os.sh");
 	$kernel = shell_exec("$directory/kernel_version.sh");
+	$cpu = shell_exec("$directory/cpu.sh");
 ?>
 
 <html>
@@ -92,6 +93,10 @@ li a:hover:not(.active) {
 	<tr>
 		<td>IP Address/es</td>
 		<td><?php echo $ip; ?></td>
+	</tr>
+	<tr>
+		<td>CPU</td>
+		<td><?php echo $cpu ?></td>
 	</tr>
 	<tr>
 		<td width="30%">CPU Temperatur   </td>
