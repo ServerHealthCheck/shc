@@ -99,7 +99,7 @@ li a:hover:not(.active) {
 		<td><?php echo $cpu ?></td>
 	</tr>
 	<tr>
-		<td width="30%">CPU Temperatur   </td>
+		<td width="30%">CPU Temperature</td>
 		<td width="50%"><?php echo $cpu_temp; echo "°C" ?></td>
 	</tr>
 	<tr>
