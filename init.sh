@@ -114,10 +114,17 @@ case "$package" in
 	;;
 
 	"debian")
-		sudo cp $site_name $index_path_debian/
-		sudo chown $user:users $index_path_debian/$site_name
-		echo "Index file moved to $index_path_debian/$site_name
-		"
+		if test -f $index_path_debian/index.html;
+			then
+				rm $index_path/index.html
+				sudo cp $site_name $index_path_debian/
+				sudo chown $user:users $index_path_debian/$site_name
+				echo "Index file moved to $index_path_debian/$site_name"
+			else
+				sudo cp $site_name $index_path_debian/
+                                sudo chown $user:users $index_path_debian/$site_name
+                                echo "Index file moved to $index_path_debian/$site_name"
+		fi
 	;;
 
 	*)
