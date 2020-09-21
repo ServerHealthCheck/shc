@@ -117,6 +117,7 @@ case "$package" in
 		if test -f $index_path_debian/index.html;
 			then
 				sudo rm $index_path/index.html
+				echo "index.html deleted"
 				sudo cp $site_name $index_path_debian/
 				sudo chown $user:users $index_path_debian/$site_name
 				echo "Index file moved to $index_path_debian/$site_name"
