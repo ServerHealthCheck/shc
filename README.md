@@ -10,25 +10,19 @@
   
             git clone https://github.com/junglert/shc.git
             
-  Edit the /etc/apache2/httpd.conf
-  Go to the following line
+ 
+  Go into the shc folder
   
-          # List of resources to look for when the client requests a directory
-                    DirectoryIndex index.html index.html.var
-  
-  Add index.php
-  
-           # List of resources to look for when the client requests a directory
-                    DirectoryIndex index.php index.html index.html.var
-
-            
+ 		cd shc/
+	   
   Execute the init.sh by typing
    
             bash init.sh
   
+  You will be asked to type in your sudo password, because the index.php file needs to be moved into /srv/www/htdocs (default apache folder location)
+  
   The script now prepares everything.
   
-  You will be asked to type in your sudo password, because the index.php file needs to be moved into /srv/www/htdocs (default apache folder location)
   
   # If you want to use Host/Client functions
   
