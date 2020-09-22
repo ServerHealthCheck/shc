@@ -18,7 +18,6 @@ splitter="-------------------------------------------------"
 package=$(grep ID_LIKE= /etc/os-release | cut -d'=' -f2 | head -1 | sed 's/"//g')
 ip=$(ip a | grep inet | cut -d't' -f2 | grep 192 | cut -d' ' -f2 | cut -d'/' -f1)
 
-
 #functions
 root_check(){ #check if logged in as user root
 if [ $USER == "root" ]
