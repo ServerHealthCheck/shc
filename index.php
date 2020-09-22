@@ -66,7 +66,7 @@ li a:hover:not(.active) {
 	$directory = ("/home/$USER/shc_scripts/");
 	$ds_used = shell_exec("$directory/storage_used.sh");
 	$ds_total = shell_exec("$directory/storage_total.sh");
-	$cpu_temp = shell_exec("$directory/temp.sh");
+	$cpu_temp = shell_exec("$directory/temperature.sh");
 	$ram_free = shell_exec("$directory/mem_used.sh");
 	$ram_total = shell_exec("$directory/mem_total.sh");
 	$ip = shell_exec("$directory/ip.sh");
