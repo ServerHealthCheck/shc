@@ -39,12 +39,15 @@ case "$package" in
 
 		if [ $? -ne 0 ]
 		then
-			echo "Adding index.php to /etc/apache2/httpd.conf"
-			sudo sed -in '/DirectoryIndex/s/$ index.php/' $conffile
 			echo "Installing apache2 and php7 module"
 			sudo zypper install -y apache2 apache2-mod_php7
+			echo "Adding index.php to /etc/apache2/httpd.conf"
+			sudo sed -in '/DirectoryIndex/s/$/ index.php/' $conffile
 		else
-			echo "apache2 and php7 module are already installed
+			echo "apache2 and php7 module are already installed"
+			echo "Adding index.php to /etc/apache2/httpd.conf"
+			sudo sed -in '/DirectoryIndex/s/$/ index.php/' $conffile
+			echo "
 			"
 		fi	
 	;;
