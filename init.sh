@@ -13,6 +13,7 @@ home_path="$HOME"
 final_path="$home_path/$folder_name"
 index_path="/srv/www/htdocs"
 index_path_debian="/var/www/html"
+conffile="/etc/apache2/httpd.conf"
 splitter="-------------------------------------------------"
 package=$(grep ID_LIKE= /etc/os-release | cut -d'=' -f2 | head -1 | sed 's/"//g')
 ip=$(ip a | grep inet | cut -d't' -f2 | grep 192 | cut -d' ' -f2 | cut -d'/' -f1)
@@ -38,6 +39,8 @@ case "$package" in
 
 		if [ $? -ne 0 ]
 		then
+			echo "Adding index.php to /etc/apache2/httpd.conf"
+			sudo sed -in '/DirectoryIndex/s/$ index.php/' $conffile
 			echo "Installing apache2 and php7 module"
 			sudo zypper install -y apache2 apache2-mod_php7
 		else
@@ -132,9 +135,6 @@ case "$package" in
 		echo "Cant find any suitable OS"
 	;;
 esac
-}
-
-conf_edit(){ #edit apache2 httpd conffile 
 }
 
 module_activation(){ #activate php module
