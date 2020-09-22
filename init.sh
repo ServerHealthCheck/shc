@@ -151,8 +151,6 @@ root_check
 echo $splitter
 installed_check
 echo $splitter
-module_activation
-echo $splitter
 folder_check
 echo $splitter
 script_move
