@@ -41,11 +41,7 @@
       
    Install this git and exec the init.sh
       
-  # Possible errors
-
-   - file is not getting compiled --> check if you have php7 installed on your host or client
-   
-      
+     
 # Future updates
    - Host and client
    
