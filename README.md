@@ -8,16 +8,16 @@
   
   Clone this git-repo: 
   
-            git clone https://github.com/junglert/shc.git
+	git clone https://github.com/junglert/shc.git
             
  
   Go into the shc folder
   
- 		cd shc/
+ 	cd shc/
 	   
   Execute the init.sh by typing
    
-            bash init.sh
+	bash init.sh
   
   You will be asked to type in your sudo password, because the index.php file needs to be moved into /srv/www/htdocs (default apache folder location)
   
