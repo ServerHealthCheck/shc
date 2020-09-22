@@ -65,7 +65,9 @@ case "$package" in
 	;;
 
 	*)
-		echo "Cant find any suitable OS"
+		echo "Cant find any suitable OS
+		"
+		exit
 	;;
 esac
 }
@@ -126,16 +128,20 @@ case "$package" in
 				echo "index.html renamed to index.html.bkp"
 				sudo cp $site_name $index_path_debian/
 				sudo chown $user:users $index_path_debian/$site_name
-				echo "Index file moved to $index_path_debian/$site_name"
+				echo "Index file moved to $index_path_debian/$site_name
+				"
 			else
 				sudo cp $site_name $index_path_debian/
                                 sudo chown $user:users $index_path_debian/$site_name
-                                echo "Index file moved to $index_path_debian/$site_name"
+                                echo "Index file moved to $index_path_debian/$site_name
+				"
 		fi
 	;;
 
 	*)
-		echo "Cant find any suitable OS"
+		echo "Cant find any suitable OS
+		"
+		exit
 	;;
 esac
 }
