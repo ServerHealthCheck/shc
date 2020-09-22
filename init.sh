@@ -62,6 +62,7 @@ case "$package" in
 		echo "Starting apache2.service and php7.3 module"
 		sudo systemctl enable --now apache2.service
 		sudo a2enmod php7.3
+		echo " "
 	;;
 
 	*)
