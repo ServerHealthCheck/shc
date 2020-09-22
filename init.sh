@@ -38,7 +38,7 @@ case "$package" in
 
 		if [ $? -ne 0 ]
 		then
-			echo "installing apache2 and php7 module"
+			echo "Installing apache2 and php7 module"
 			sudo zypper install -y apache2 apache2-mod_php7
 		else
 			echo "apache2 and php7 module are already installed
@@ -138,7 +138,7 @@ module_activation(){ #activate php module
 echo "Starting apache2.service and php7 module
 "
 sudo systemctl enable --now apache2.service
-sudo a2enmod php7.4
+sudo a2enmod php7
 echo " "
 }
 
