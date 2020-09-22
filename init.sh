@@ -43,10 +43,16 @@ case "$package" in
 			sudo zypper install -y apache2 apache2-mod_php7
 			echo "Adding index.php to /etc/apache2/httpd.conf"
 			sudo sed -in '/DirectoryIndex/s/$/ index.php/' $conffile
+			echo "Starting apache2.service and php7 module"
+			sudo systemctl enable --now apache2.service
+			sudo a2enmod php7
 		else
 			echo "apache2 and php7 module are already installed"
 			echo "Adding index.php to /etc/apache2/httpd.conf"
 			sudo sed -in '/DirectoryIndex/s/$/ index.php/' $conffile
+			echo "Starting apache2.service and php7 module"
+			sudo systemctl enable --now apache2.service
+			sudo a2enmod php7
 		fi	
 	;;
 
@@ -60,6 +66,9 @@ case "$package" in
 
 	"debian" | "ubuntu")
 		sudo apt-get install -y apache2 libapache2-mod-php
+		echo "Starting apache2.service and php7.4 module"
+		sudo systemctl enable --now apache2.service
+		sudo a2enmod php7.4
 	;;
 
 	*)
@@ -138,30 +147,18 @@ case "$package" in
 esac
 }
 
-module_activation(){ #activate php module
-echo "Starting apache2.service and php7 module
-"
-sudo systemctl enable --now apache2.service
-sudo a2enmod php7
-echo " "
-}
-
-splitter(){
-echo $splitter
-}
-
 root_check
-splitter
+echo $splitter
 installed_check
-splitter
+echo $splitter
 module_activation
-splitter
+echo $splitter
 folder_check
-splitter
+echo $splitter
 script_move
-splitter
+echo $splitter
 index_move
-splitter
+echo $splitter
 echo "Connect to $ip via your webbrowser
 "
-splitter
+echo $splitter
