@@ -134,6 +134,9 @@ case "$package" in
 esac
 }
 
+conf_edit(){ #edit apache2 httpd conffile 
+}
+
 module_activation(){ #activate php module
 echo "Starting apache2.service and php7 module
 "
