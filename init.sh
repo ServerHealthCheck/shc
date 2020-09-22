@@ -9,7 +9,7 @@
 user="$USER"
 site_name="index.php"
 folder_name="shc_scripts"
-home_path="$HOME"
+home_path="/home/$USER"
 final_path="$home_path/$folder_name"
 index_path="/srv/www/htdocs"
 index_path_debian="/var/www/html"
@@ -19,16 +19,6 @@ package=$(grep ID_LIKE= /etc/os-release | cut -d'=' -f2 | head -1 | sed 's/"//g'
 ip=$(ip a | grep inet | cut -d't' -f2 | grep 192 | cut -d' ' -f2 | cut -d'/' -f1)
 
 #functions
-root_check(){ #check if logged in as user root
-if [ $USER == "root" ]
-	then
-		echo "Change to another user, dont use root
-		"
-		sleep 10
-		exit
-fi
-}
-
 installed_check(){ #check if apache and moudle are installed
 echo "Checking if apache2 and apache2-mod_php7 are installed
 "
