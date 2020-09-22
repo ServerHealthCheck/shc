@@ -140,8 +140,6 @@ case "$package" in
 esac
 }
 
-root_check
-echo $splitter
 installed_check
 echo $splitter
 folder_check
