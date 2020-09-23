@@ -74,6 +74,7 @@ li a:hover:not(.active) {
 	$os = shell_exec("$directory/os.sh");
 	$kernel = shell_exec("$directory/kernel_version.sh");
 	$uptime = shell_exec("$directory/uptime.sh");
+	$cpu = shell_exec("$directory/cpu.sh");
 ?>
 
 <html>
