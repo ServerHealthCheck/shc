@@ -9,26 +9,16 @@
 user="$USER"
 site_name="index.php"
 folder_name="shc_scripts"
-home_path="$HOME"
+home_path="/home/$USER"
 final_path="$home_path/$folder_name"
 index_path="/srv/www/htdocs"
 index_path_debian="/var/www/html"
+conffile="/etc/apache2/httpd.conf"
 splitter="-------------------------------------------------"
 package=$(grep ID_LIKE= /etc/os-release | cut -d'=' -f2 | head -1 | sed 's/"//g')
 ip=$(ip a | grep inet | cut -d't' -f2 | grep 192 | cut -d' ' -f2 | cut -d'/' -f1)
 
-
 #functions
-root_check(){ #check if logged in as user root
-if [ $USER == "root" ]
-	then
-		echo "Change to another user, dont use root
-		"
-		sleep 10
-		exit
-fi
-}
-
 installed_check(){ #check if apache and moudle are installed
 echo "Checking if apache2 and apache2-mod_php7 are installed
 "
@@ -38,11 +28,26 @@ case "$package" in
 
 		if [ $? -ne 0 ]
 		then
-			echo "installing apache2 and php7 module"
+			echo "Installing apache2 and php7 module"
 			sudo zypper install -y apache2 apache2-mod_php7
+			echo "Adding index.php to /etc/apache2/httpd.conf"
+			sudo sed -in '/DirectoryIndex/s/$/ index.php/' $conffile
+			echo "Adding $USER to group www"
+                        sudo usermod -aG www $USER
+			echo "Starting apache2.service and php7 module"
+			sudo systemctl enable --now apache2.service
+			sudo a2enmod php7
+			echo " "
 		else
-			echo "apache2 and php7 module are already installed
-			"
+			echo "apache2 and php7 module are already installed"
+			echo "Adding index.php to /etc/apache2/httpd.conf"
+			sudo sed -in '/DirectoryIndex/s/$/ index.php/' $conffile
+			echo "Adding $USER to group www"
+                        sudo usermod -aG www $USER
+			echo "Starting apache2.service and php7 module"
+			sudo systemctl enable --now apache2.service
+			sudo a2enmod php7
+			echo " "
 		fi	
 	;;
 
@@ -56,10 +61,16 @@ case "$package" in
 
 	"debian" | "ubuntu")
 		sudo apt-get install -y apache2 libapache2-mod-php
+		echo "Starting apache2.service and php7.3 module"
+		sudo systemctl enable --now apache2.service
+		sudo a2enmod php7.3
+		echo " "
 	;;
 
 	*)
-		echo "Cant find any suitable OS"
+		echo "Cant find any suitable OS
+		"
+		exit
 	;;
 esac
 }
@@ -114,42 +125,38 @@ case "$package" in
 	;;
 
 	"debian")
-		sudo cp $site_name $index_path_debian/
-		sudo chown $user:users $index_path_debian/$site_name
-		echo "Index file moved to $index_path_debian/$site_name
-		"
+		if test -f $index_path_debian/index.html;
+			then
+				sudo mv $index_path_debian/index.html $index_path_debian/index.html.bkp
+				echo "index.html renamed to index.html.bkp"
+				sudo cp $site_name $index_path_debian/
+				sudo chown $user:users $index_path_debian/$site_name
+				echo "Index file moved to $index_path_debian/$site_name
+				"
+			else
+				sudo cp $site_name $index_path_debian/
+                                sudo chown $user:users $index_path_debian/$site_name
+                                echo "Index file moved to $index_path_debian/$site_name
+				"
+		fi
 	;;
 
 	*)
-		echo "Cant find any suitable OS"
+		echo "Cant find any suitable OS
+		"
+		exit
 	;;
 esac
 }
 
-module_activation(){ #activate php module
-echo "Starting apache2.service and php7 module
-"
-sudo systemctl enable --now apache2.service
-sudo a2enmod php7.4
-echo " "
-}
-
-splitter(){
-echo $splitter
-}
-
-root_check
-splitter
 installed_check
-splitter
-module_activation
-splitter
+echo $splitter
 folder_check
-splitter
+echo $splitter
 script_move
-splitter
+echo $splitter
 index_move
-splitter
+echo $splitter
 echo "Connect to $ip via your webbrowser
 "
-splitter
+echo $splitter
