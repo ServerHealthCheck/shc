@@ -66,13 +66,14 @@ li a:hover:not(.active) {
 	$directory = ("/home/$USER/shc_scripts/");
 	$ds_used = shell_exec("$directory/storage_used.sh");
 	$ds_total = shell_exec("$directory/storage_total.sh");
-	$cpu_temp = shell_exec("$directory/temp.sh");
+	$cpu_temp = shell_exec("$directory/temperature.sh");
 	$ram_free = shell_exec("$directory/mem_used.sh");
 	$ram_total = shell_exec("$directory/mem_total.sh");
 	$ip = shell_exec("$directory/ip.sh");
 	$hostname = shell_exec("$directory/hostname.sh");
 	$os = shell_exec("$directory/os.sh");
 	$kernel = shell_exec("$directory/kernel_version.sh");
+	$uptime = shell_exec("$directory/uptime.sh");
 	$cpu = shell_exec("$directory/cpu.sh");
 ?>
 
@@ -99,7 +100,7 @@ li a:hover:not(.active) {
 		<td><?php echo $cpu ?></td>
 	</tr>
 	<tr>
-		<td width="30%">CPU Temperatur   </td>
+		<td width="30%">CPU Temperature</td>
 		<td width="50%"><?php echo $cpu_temp; echo "°C" ?></td>
 	</tr>
 	<tr>
@@ -109,6 +110,10 @@ li a:hover:not(.active) {
 	<tr>
 		<td>Disk Usage</td>
 		<td><?php echo $ds_used; echo "GB of "; echo $ds_total; echo "GB" ?></td>
+	</tr>
+	<tr>
+		<td>Uptime</td>
+		<td><?php echo $uptime; ?></td>
 	</tr>	
 </table>
 </html>
