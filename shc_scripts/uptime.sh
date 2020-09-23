@@ -1,4 +1,4 @@
 #!/bin/bash
 
 # get uptime (removed extra foo)
-uptime=$(uptime | awk -F "up" '{print $2}' | cut -d, -f1 | sed 's/^ *//g')
+uptime | awk -F "up" '{print $2}' | cut -d, -f1 | sed 's/^ *//g'
