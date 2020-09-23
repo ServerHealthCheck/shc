@@ -37,8 +37,7 @@ case "$package" in
 			echo "Starting apache2.service and php7 module"
 			sudo systemctl enable --now apache2.service
 			sudo a2enmod php7
-			echo "
-			"
+			echo " "
 		else
 			echo "apache2 and php7 module are already installed"
 			echo "Adding index.php to /etc/apache2/httpd.conf"
@@ -48,8 +47,7 @@ case "$package" in
 			echo "Starting apache2.service and php7 module"
 			sudo systemctl enable --now apache2.service
 			sudo a2enmod php7
-			echo "
-			"
+			echo " "
 		fi	
 	;;
 
