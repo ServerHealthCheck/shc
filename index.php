@@ -73,6 +73,7 @@ li a:hover:not(.active) {
 	$hostname = shell_exec("$directory/hostname.sh");
 	$os = shell_exec("$directory/os.sh");
 	$kernel = shell_exec("$directory/kernel_version.sh");
+	$uptime = shell_exec("$directory/uptime.sh");
 	$cpu = shell_exec("$directory/cpu.sh");
 ?>
 
@@ -109,6 +110,10 @@ li a:hover:not(.active) {
 	<tr>
 		<td>Disk Usage</td>
 		<td><?php echo $ds_used; echo "GB of "; echo $ds_total; echo "GB" ?></td>
+	</tr>
+	<tr>
+		<td>Uptime</td>
+		<td><?php echo $uptime; ?></td>
 	</tr>	
 </table>
 </html>
