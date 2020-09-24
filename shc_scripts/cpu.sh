@@ -1,2 +1,17 @@
 #!/bin/bash
-lscpu | grep "Model name" | cut -d':' -f2
+language=$(locale | grep LANG | cut -d'=' -f2)
+
+case "$language" in
+	"en_GB.UTF-8")
+		echo $(lscpu | grep "Model name" | cut -d':' -f2)
+	;;
+	
+	"de_DE.UTF-8")
+		echo $(lscpu | grep "Modellname" | cut -d':' -f2)
+	;;
+	
+	*)
+		echo "Not a supported language"
+		exit
+	;;
+esac	
