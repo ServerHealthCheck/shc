@@ -6,6 +6,10 @@ case "$language" in
 		echo $(lscpu | grep "Model name" | cut -d':' -f2)
 	;;
 	
+	"en_US.utf8")
+		echo $(lscpu | grep "Model name" | cut -d':' -f2)
+	;;
+	
 	"de_DE.UTF-8")
 		echo $(lscpu | grep "Modellname" | cut -d':' -f2)
 	;;
