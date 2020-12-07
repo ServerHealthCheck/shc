@@ -4,6 +4,8 @@
 [![GitHub contributors](https://img.shields.io/github/contributors/Naereen/StrapDown.js.svg)](https://github.com/junglert/shc/graphs/contributors)
 [![GitHub version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=gh&type=6&v=3.2)](https://github.com/junglert/shc/releases/tag/shc_v3.2)
 
+The easy way to display information about your device - made with php and shell
+
 # How to install on server
   
   Clone this git-repo: 
