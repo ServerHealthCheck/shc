@@ -53,4 +53,4 @@ The easy way to display information about your device - made with php and shell
      
    - Wiki / Manual 
     
-         
+   - Docker      
