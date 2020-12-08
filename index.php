@@ -16,6 +16,11 @@ body {
 	font-family: arial;
 }
 	
+@media (prefers-color-scheme: dark) {
+	html,img,video{filter:invert(1);}
+	#wdw_logo,#art_links img{filter:invert(0)}
+}
+
 </style>
 </head>
 	
