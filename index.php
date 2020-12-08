@@ -3,64 +3,24 @@
 <meta charset="UTF-8">
 <title>Server Health Check</title>
 <style>
-h1 {
-	color: Black;
-	text-align:left;
-	font: 40px arial;
-}
 
-h2 {
-	color: Black;
+h1 {
+	color: 1b1d23;
 	text-align:left;
 	font: 40px arial;
 	margin-bottom: 0px;
 }
 
 body {
+	background-color: 24292e;
 	font-family: arial;
 }
-
-ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
-	background-color: #111;
-	position: -webkit-sticky;
-	position: sticky;
-	top: 0;
-	font: 40px arial;
-}
-
-li {
-	float: left;
-}
-
-li a {
-	display: block;
-	color: white;
-	text-align: center;
-	padding: 14px 16px;
-	text-decoration: none;
-}
-
-li a:hover:not(.active) {
-	background-color: #111;
-}
-
-.active {
-	background-color: ;
-}
+	
 </style>
 </head>
 	
 <body>
-<ul>	
-	<li style="float:left"><a href="http://">Host</a></li> <?php //Add your own host http://hostname_host/ ?>
-	<li style="float:center"><a href="http://">RemoteClient</a></li> <?php //Add your own client http://hostname_client/ ?>
-</ul>
-	
-<h2>System</h2>
+<h1>System</h1>
 <?php
 	$USER = get_current_user();
 	$directory = ("/home/$USER/shc_scripts/");
@@ -119,7 +79,7 @@ li a:hover:not(.active) {
 </html>
 
 <br>
-<h2>Services</h2> 
+<h1>Services</h1> 
 <?php
 	$USER = get_current_user();
 	$directory = ("/home/$USER/shc_scripts/");
