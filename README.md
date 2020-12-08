@@ -6,6 +6,8 @@
 
 The easy way to display information about your device - made with php and shell
 
+### Now with dark-theme!
+
 # How to install on server
   
   Clone this git-repo: 
