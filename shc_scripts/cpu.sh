@@ -10,12 +10,16 @@ case "$language" in
 		echo $(lscpu | grep "Model name" | cut -d':' -f2)
 	;;
 	
+	"en_US.UTF-8")
+		echo $(lscpu | grep "Model name" | cut -d':' -f2)
+	;;
+	
 	"de_DE.UTF-8")
 		echo $(lscpu | grep "Modellname" | cut -d':' -f2)
 	;;
 	
 	*)
-		echo "Not a supported language"
+		echo "Not a supported language: $language"
 		exit
 	;;
 esac	
