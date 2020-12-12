@@ -40,6 +40,7 @@ body {
 	$kernel = shell_exec("$directory/kernel_version.sh");
 	$uptime = shell_exec("$directory/uptime.sh");
 	$cpu = shell_exec("$directory/cpu.sh");
+	$arch = shell_exec("$directory/arch.sh");
 ?>
 
 <html>
@@ -47,6 +48,10 @@ body {
 	<tr>
 		<td>Hostname</td>
 		<td><?php echo $hostname; ?></td>
+	</tr>
+	<tr>
+		<td>Architecture</td>
+		<td><?php echo $arch; ?></td>
 	</tr>
 	<tr>
 		<td>OS/Linux</td>
