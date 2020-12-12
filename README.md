@@ -30,11 +30,10 @@ The easy way to display information about your device - made with php and shell
   
         
 # Future updates
-   - Host and client
-   
+
    - More services
    
-   - More system informations
+   - More system information
      
    - Wiki / Manual 
     
