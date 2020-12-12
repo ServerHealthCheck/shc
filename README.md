@@ -8,6 +8,7 @@ The easy way to display information about your device - made with php and shell
 
 ### Now with dark-theme!
 
+
 # How to install on server
   
   Clone this git-repo: 
@@ -27,25 +28,7 @@ The easy way to display information about your device - made with php and shell
   
   The script now prepares everything.
   
-  
-  # If you want to use Host/Client functions
-  
-  Edit the /etc/hosts file of your client
-  
-  Add the following line beneath the localhost line
-  
-      127.0.1.1 localost.localdomain localhost $your_prefered_name
-  
-  Add both of your domain-hostnames to the index.php file you find in /srv/www/htdocs/ behind the "http://" tag
-  
-      <ul>	
-	       <li style="float:left"><a href="http://">Host</a></li> <?php //Add your own host http://hostname_host/ ?>
-	       <li style="float:center"><a href="http://">RemoteClient</a></li> <?php //Add your own client http://hostname_client/ ?>
-      </ul>
-      
-   Install this git and exec the init.sh
-      
-     
+        
 # Future updates
    - Host and client
    
