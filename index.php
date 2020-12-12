@@ -62,7 +62,7 @@ body {
 	</tr>
 	<tr>
 		<td>CPU</td>
-		<td><?php echo $cpu ?></td>
+		<td><?php echo $cpu; ?></td>
 	</tr>
 	<tr>
 		<td width="30%">CPU Temperature</td>
