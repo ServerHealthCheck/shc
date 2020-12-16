@@ -1,4 +1,5 @@
-<img src="https://github.com/junglert/shc/blob/master/shc_logo.png" width="200" height="200">
+<img align="left" src="https://github.com/junglert/shc/blob/master/shc_logo.png" width="200" height="200">
+
 
 # shc  | ServerHealthCheck
 
@@ -10,6 +11,8 @@
 The easy way to display information about your device - made with php and shell
 
 ### Now with dark-theme!
+
+
 
 
 # How to install on server
