@@ -1,3 +1,4 @@
+![alt text](https://github.com/junglert/shc/blob/master/shc_logo.png)
 # shc  | ServerHealthCheck
 [![made-with-bash](https://img.shields.io/badge/Made%20with-Bash-1f425f.svg)](https://www.gnu.org/software/bash/)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
