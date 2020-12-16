@@ -12,12 +12,10 @@
 
 The easy way to display information about your device - made with php and shell
 
+
 ### Now with dark-theme!
 
-
-
-
-# How to install on server
+# Installation
   
   Clone this git-repo: 
   
