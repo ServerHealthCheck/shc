@@ -1,9 +1,12 @@
-# shc  | ServerHealthCheck
+<p align="center">
+    <a href="https://github.com/junglert/shc/">
+        <img src="https://github.com/junglert/shc/blob/master/shc_logo.png" width="250" height="250" alt="Pi-hole">
+    </a>
+    <br>
+    <strong>The easy way to display information about your device</strong>  
+</p>
 
-<img align="left" src="https://github.com/junglert/shc/blob/master/shc_logo.png" width="200" height="200">
-<br>
-
-	
+# shc  | ServerHealthCheck	
 [![made-with-bash](https://img.shields.io/badge/Made%20with-Bash-1f425f.svg)](https://www.gnu.org/software/bash/)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![GitHub contributors](https://img.shields.io/github/contributors/Naereen/StrapDown.js.svg)](https://github.com/junglert/shc/graphs/contributors)
