@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://github.com/junglert/shc/">
-        <img src="https://github.com/junglert/shc/blob/master/shc_logo.png" width="250" height="250" alt="Pi-hole">
+        <img src="https://github.com/junglert/shc/blob/master/shc_logo.png" width="250" height="250" alt="shc">
     </a>
     <br>
     <strong>The easy way to display information about your device</strong>  
@@ -11,9 +11,6 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![GitHub contributors](https://img.shields.io/github/contributors/Naereen/StrapDown.js.svg)](https://github.com/junglert/shc/graphs/contributors)
 [![GitHub version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=gh&type=6&v=3.2)](https://github.com/junglert/shc/releases/tag/shc_v3.2)
-
-The easy way to display information about your device - made with php and shell
-
 
 ### Now with dark-theme!
 
