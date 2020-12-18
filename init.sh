@@ -13,7 +13,7 @@ path_index_file_debian="/var/www/html"
 path_conf_file="/etc/apache2/httpd.conf"
 splitter="-------------------------------------------------"
 package=$(grep ID_LIKE= /etc/os-release | cut -d'=' -f2 | head -1 | sed 's/"//g')
-ip=$(ip a | grep inet | cut -d't' -f2 | grep 192 | cut -d' ' -f2 | cut -d'/' -f1)
+ip=$(ip -o route get 0.0.0.1 | cut -d' ' -f7)
 
 #functions
 installed_check(){ #check if apache and moudle are installed
