@@ -29,6 +29,7 @@ splitter(){
 	echo "-------------------------------------------------"
 }
 1install_packages(){
+echo -e "${TextColorYellow}[NOTE   ]${TextColorNone}\tChecking if apache2 and apache2-mod_php7 are installed"
 	"suse opensuse" | "opensuse suse")
 		zypper se -i apache2 apache2-mod_php7 &> /dev/null
 
