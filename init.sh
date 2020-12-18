@@ -136,21 +136,13 @@ case "${distribution}" in
 	;;
 
 	*)
-		echo "Cant find any suitable OS
-		"
+		echo -e "${TextColorRed}[ERROR  ]${TextColorNone}\tCant find any suitable OS"
 		exit
 	;;
 esac
+sudo cp ${PWD}/webserver_files/${name_site} ${path_file_index}
+sudo chown ${USER}:users ${path_file_index}/${name_site}
+echo -e "${TextColorYellow}[NOTE   ]${TextColorNone}\tIndex file moved to ${path_file_index}/${name_site}"
 }
 
-installed_check
-echo $splitter
-folder_check
-echo $splitter
-script_move
-echo $splitter
-index_move
-echo $splitter
-echo "Connect to $ip via your webbrowser
-"
-echo $splitter
+echo -e "${TextColorGreen}[ S H C ]${TextColorNone}\tStart installation of ServerHealtCheck v${shc_version}"
