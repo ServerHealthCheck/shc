@@ -2,7 +2,7 @@
 #author: junglert
 #co-author: amueller
 #mail:
-#date: 04.08.2020
+#date: 18.12.2020
 #license: GPL-3.0
 #summary: bash script that places the index.php and the scripts in the correct places
 
