@@ -119,11 +119,11 @@ do
 done
 }
 
-	"arch")
-		sudo cp $site_name $index_path/
-		sudo chown $user:users $index_path/$site_name
-		echo "Index file moved to $index_path/$site_name
-		"
+4move_index(){
+echo -e "${TextColorYellow}[NOTE   ]${TextColorNone}\tMoving ${name_site} into apache2 default place"
+case "${distribution}" in
+	"suse opensuse" | "opensuse suse" | "redhat" | "fedora" | "centos" | "arch")
+		# use default path
 	;;
 
 	"debian")
