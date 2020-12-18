@@ -4,7 +4,7 @@
 #mail:
 #date: 18.12.2020
 #license: GPL-3.0
-#summary: bash script that places the index.php and the scripts in the correct places
+#summary: These scripts installes required packages and moves files where they belong
 
 # Color Configuration
 TextColorRed='\033[0;31m'
