@@ -20,7 +20,7 @@ installed_check(){
 echo "Checking if apache2 and apache2-mod_php7 are installed"
 case "$package" in
 	"suse opensuse" | "opensuse suse")
-		zypper se -i apache2 apache2-mod_php7 > /dev/null
+		zypper se -i apache2 apache2-mod_php7 &> /dev/null
 
 		if [ $? -ne 0 ]
 		then
