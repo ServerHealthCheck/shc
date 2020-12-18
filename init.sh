@@ -99,33 +99,25 @@ if [ -d "${path_folder_shc}" ];
 fi
 }
 
-script_move(){ #move scripts into folder
-echo "Moving scripts into $final_path
-"
-cd shc_scripts/
-cp *.sh $final_path
-cd ..
-echo "Files moved successfully
-"
+3copy_files(){
+for script in ${active_scripts}
+do
+	diff "${PWD}/shc_scripts/${script}.sh" "${path_folder_shc}/${script}.sh" &> /dev/null
+	case $? in
+	0)
+		echo -e "${TextColorGreen}[NOTE   ]${TextColorNone}\t${script}.sh is up to date"
+	;;
+	1)
+		cp "${PWD}/shc_scripts/${script}.sh" "${path_folder_shc}/${script}.sh"
+		echo -e "${TextColorYellow}[NOTE   ]${TextColorNone}\t${script}.sh got updated"
+	;;
+	*)
+		cp "${PWD}/shc_scripts/${script}.sh" "${path_folder_shc}/${script}.sh"
+		echo -e "${TextColorYellow}[NOTE   ]${TextColorNone}\t${script}.sh was created"
+		;;
+	esac
+done
 }
-
-index_move(){ #move index file into correct place
-echo "Moving $site_name into apache2 default place (needs sudo)
-"
-case "$package" in
-	"suse opensuse" | "opensuse suse")
-		sudo cp $site_name $index_path/
-		sudo chown $user:users $index_path/$site_name
-		echo "Index file moved to $index_path/$site_name
-		"
-	;;
-
-	"redhat" | "fedora" | "centos")
-		sudo cp $site_name $index_path/
-		sudo chown $user:users $index_path/$site_name
-		echo "Index file moved to $index_path/$site_name
-		"
-	;;
 
 	"arch")
 		sudo cp $site_name $index_path/
