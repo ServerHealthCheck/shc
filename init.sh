@@ -25,9 +25,9 @@ path_file_conf="/etc/apache2/httpd.conf"
 active_scripts="storage_used storage_total temperature mem_used mem_total ip hostname os kernel_version uptime cpu arch"
 
 #functions
-installed_check(){
-echo "Checking if apache2 and apache2-mod_php7 are installed"
-case "$package" in
+splitter(){
+	echo "-------------------------------------------------"
+}
 	"suse opensuse" | "opensuse suse")
 		zypper se -i apache2 apache2-mod_php7 &> /dev/null
 
