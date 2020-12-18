@@ -6,22 +6,23 @@
 #license: GPL-3.0
 #summary: These scripts installes required packages and moves files where they belong
 
-# Color Configuration
+# Output Configuration
 TextColorRed='\033[0;31m'
 TextColorOrange='\033[1;31m'
 TextColorYellow='\033[1;33m'
 TextColorGreen='\033[0;32m'
 TextColorNone='\033[0m'
-
-#variables
-name_site="index.php"
-path_shc_folder="$HOME/.shc"
-path_index_file="/srv/www/htdocs"
-path_index_file_debian="/var/www/html"
-path_conf_file="/etc/apache2/httpd.conf"
-splitter="-------------------------------------------------"
+# These should be unchanged
 distribution=$(grep ID_LIKE= /etc/os-release | cut -d'=' -f2 | head -1 | sed 's/"//g')
+pkg_required="apache2 apache2-mod_php7"
 ip=$(ip -o route get 0.0.0.1 | cut -d' ' -f7)
+name_site="index.php"
+shc_version="3.2.1"
+# variables
+path_folder_shc="$HOME/.shc"
+path_file_index="/srv/www/htdocs"
+path_file_conf="/etc/apache2/httpd.conf"
+active_scripts="storage_used storage_total temperature mem_used mem_total ip hostname os kernel_version uptime cpu arch"
 
 #functions
 installed_check(){
