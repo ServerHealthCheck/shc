@@ -1,5 +1,6 @@
 #!/bin/bash
 #author: junglert
+#co-author: amueller
 #mail:
 #date: 04.08.2020
 #license: GPL-3.0
