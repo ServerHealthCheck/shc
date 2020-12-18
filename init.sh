@@ -5,6 +5,13 @@
 #license: GPL-3.0
 #summary: bash script that places the index.php and the scripts in the correct places
 
+# Color Configuration
+TextColorRed='\033[0;31m'
+TextColorOrange='\033[1;31m'
+TextColorYellow='\033[1;33m'
+TextColorGreen='\033[0;32m'
+TextColorNone='\033[0m'
+
 #variables
 name_site="index.php"
 path_shc_folder="$HOME/.shc"
