@@ -19,7 +19,7 @@ path_index_file="/srv/www/htdocs"
 path_index_file_debian="/var/www/html"
 path_conf_file="/etc/apache2/httpd.conf"
 splitter="-------------------------------------------------"
-package=$(grep ID_LIKE= /etc/os-release | cut -d'=' -f2 | head -1 | sed 's/"//g')
+distribution=$(grep ID_LIKE= /etc/os-release | cut -d'=' -f2 | head -1 | sed 's/"//g')
 ip=$(ip -o route get 0.0.0.1 | cut -d' ' -f7)
 
 #functions
