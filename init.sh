@@ -16,9 +16,8 @@ package=$(grep ID_LIKE= /etc/os-release | cut -d'=' -f2 | head -1 | sed 's/"//g'
 ip=$(ip -o route get 0.0.0.1 | cut -d' ' -f7)
 
 #functions
-installed_check(){ #check if apache and moudle are installed
-echo "Checking if apache2 and apache2-mod_php7 are installed
-"
+installed_check(){
+echo "Checking if apache2 and apache2-mod_php7 are installed"
 case "$package" in
 	"suse opensuse" | "opensuse suse")
 		zypper se -i apache2 apache2-mod_php7 > /dev/null
