@@ -28,7 +28,7 @@ body {
 <h1>System</h1>
 <?php
 	$USER = get_current_user();
-	$directory = ("/home/$USER/shc_scripts/");
+	$directory = ("/home/$USER/.shc/");
 	$ds_used = shell_exec("$directory/storage_used.sh");
 	$ds_total = shell_exec("$directory/storage_total.sh");
 	$cpu_temp = shell_exec("$directory/temperature.sh");
