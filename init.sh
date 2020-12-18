@@ -28,6 +28,7 @@ active_scripts="storage_used storage_total temperature mem_used mem_total ip hos
 splitter(){
 	echo "-------------------------------------------------"
 }
+
 1install_packages(){
 echo -e "${TextColorYellow}[NOTE   ]${TextColorNone}\tChecking if apache2 and apache2-mod_php7 are installed"
 case "${distribution}" in
@@ -52,7 +53,7 @@ case "${distribution}" in
 			sudo a2enmod php7
 		else
 			echo -e "${TextColorGreen}[NOTE   ]${TextColorNone}\tPhp module already active"
-		fi	
+		fi
 	;;
 
 	"redhat" | "fedora" | "centos")
@@ -71,7 +72,7 @@ case "${distribution}" in
 	*)
 		echo -e "${TextColorRed}[ERROR  ]${TextColorNone}\tCant find any suitable OS"
 		exit
-	;;
+		;;
 esac
 if ! groups ${USER} | grep -q "www"
 then
@@ -106,11 +107,11 @@ do
 	case $? in
 	0)
 		echo -e "${TextColorGreen}[NOTE   ]${TextColorNone}\t${script}.sh is up to date"
-	;;
+		;;
 	1)
 		cp "${PWD}/shc_scripts/${script}.sh" "${path_folder_shc}/${script}.sh"
 		echo -e "${TextColorYellow}[NOTE   ]${TextColorNone}\t${script}.sh got updated"
-	;;
+		;;
 	*)
 		cp "${PWD}/shc_scripts/${script}.sh" "${path_folder_shc}/${script}.sh"
 		echo -e "${TextColorYellow}[NOTE   ]${TextColorNone}\t${script}.sh was created"
@@ -124,21 +125,19 @@ echo -e "${TextColorYellow}[NOTE   ]${TextColorNone}\tMoving ${name_site} into a
 case "${distribution}" in
 	"suse opensuse" | "opensuse suse" | "redhat" | "fedora" | "centos" | "arch")
 		# use default path
-	;;
-
+		;;
 	"debian")
 		path_file_index="/var/www/html"
 		if test -f ${path_file_index}/index.html;
-			then
+		then
 			sudo mv ${path_file_index}/index.html ${path_file_index}/index.html.bkp
 			echo -e "${TextColorYellow}[NOTE   ]${TextColorNone}\tindex.html was renamed to index.html.bkp"
 		fi
-	;;
-
+		;;
 	*)
 		echo -e "${TextColorRed}[ERROR  ]${TextColorNone}\tCant find any suitable OS"
 		exit
-	;;
+		;;
 esac
 sudo cp ${PWD}/webserver_files/${name_site} ${path_file_index}
 sudo chown ${USER}:users ${path_file_index}/${name_site}
