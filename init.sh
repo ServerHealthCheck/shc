@@ -146,3 +146,12 @@ echo -e "${TextColorYellow}[NOTE   ]${TextColorNone}\tIndex file moved to ${path
 }
 
 echo -e "${TextColorGreen}[ S H C ]${TextColorNone}\tStart installation of ServerHealtCheck v${shc_version}"
+# run every function in this script except splitter
+for task in $(declare -F | grep -v splitter | cut -d' ' -f3)
+do
+	splitter
+	$task
+done
+splitter
+echo -e "${TextColorGreen}[ S H C ]${TextColorNone}\tSHC is now available via your webbrowser on http://${ip}!"
+splitter
