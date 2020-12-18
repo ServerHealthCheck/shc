@@ -30,31 +30,28 @@ splitter(){
 }
 1install_packages(){
 echo -e "${TextColorYellow}[NOTE   ]${TextColorNone}\tChecking if apache2 and apache2-mod_php7 are installed"
+case "${distribution}" in
 	"suse opensuse" | "opensuse suse")
-		zypper se -i apache2 apache2-mod_php7 &> /dev/null
-
-		if [ $? -ne 0 ]
+		for package in ${pkg_required}
+		do
+			zypper se -i $package &> /dev/null
+			pkg_installed=$((${pkg_installed} + $?))
+		done
+		if [ ${pkg_installed} -ne 0 ]
 		then
-			echo "Installing apache2 and php7 module"
-			sudo zypper install -y apache2 apache2-mod_php7
-			echo "Adding index.php to /etc/apache2/httpd.conf"
-			sudo sed -in '/DirectoryIndex/s/$/ index.php/' $conffile
-			echo "Adding $USER to group www"
-                        sudo usermod -aG www $USER
-			echo "Starting apache2.service and php7 module"
-			sudo systemctl enable --now apache2.service
-			sudo a2enmod php7
-			echo " "
+			echo -e "${TextColorYellow}[INSTALL]${TextColorNone}\tInstalling required packages"
+			sudo zypper install -y ${pkg_required} &> /dev/null
 		else
-			echo "apache2 and php7 module are already installed"
-			echo "Adding index.php to /etc/apache2/httpd.conf"
-			sudo sed -in '/DirectoryIndex/s/$/ index.php/' $conffile
-			echo "Adding $USER to group www"
-                        sudo usermod -aG www $USER
-			echo "Starting apache2.service and php7 module"
-			sudo systemctl enable --now apache2.service
+			echo -e "${TextColorGreen}[NOTE   ]${TextColorNone}\tRequired packages are alread installed"
+		fi	
+		echo -e "${TextColorYellow}[CONFIG ]${TextColorNone}\tAdding index.php to /etc/apache2/httpd.conf"
+		sudo sed -in '/DirectoryIndex/s/$/ index.php/' ${path_file_conf}
+		if ! sudo a2enmod -l | grep -q php7
+		then
+			echo -e "${TextColorYellow}[CONFIG ]${TextColorNone}\tEnabling php module"
 			sudo a2enmod php7
-			echo " "
+		else
+			echo -e "${TextColorGreen}[NOTE   ]${TextColorNone}\tPhp module already active"
 		fi	
 	;;
 
@@ -68,18 +65,28 @@ echo -e "${TextColorYellow}[NOTE   ]${TextColorNone}\tChecking if apache2 and ap
 
 	"debian" | "ubuntu")
 		sudo apt-get install -y apache2 libapache2-mod-php
-		echo "Starting apache2.service and php7.3 module"
-		sudo systemctl enable --now apache2.service
 		sudo a2enmod php7.3
-		echo " "
 	;;
 
 	*)
-		echo "Cant find any suitable OS
-		"
+		echo -e "${TextColorRed}[ERROR  ]${TextColorNone}\tCant find any suitable OS"
 		exit
 	;;
 esac
+if ! groups ${USER} | grep -q "www"
+then
+	echo -e "${TextColorYellow}[CONFIG ]${TextColorNone}\tAdding $USER to group www"
+	sudo usermod -aG www ${USER}
+else
+	echo -e "${TextColorGreen}[CONFIG ]${TextColorNone}\t$USER is already part of group www"
+fi
+if systemctl list-unit-files | grep -e "apache2.service" | grep -qe  "enabled"
+then
+	echo -e "${TextColorGreen}[NOTE   ]${TextColorNone}\tWebserver already enabled"
+else
+	echo -e "${TextColorYellow}[CONFIG ]${TextColorNone}\tEnabling webserver"
+	sudo systemctl enable --now apache2.service &> /dev/null
+fi
 }
 
 folder_check(){ #generate folder for the scripts, if not already generated
