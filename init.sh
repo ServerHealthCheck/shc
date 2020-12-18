@@ -89,17 +89,13 @@ else
 fi
 }
 
-folder_check(){ #generate folder for the scripts, if not already generated
-echo "Initial check if folder $folder_name exists
-"
-if [ -d "$final_path" ];
+2create_folder(){
+if [ -d "${path_folder_shc}" ];
 	then
-		echo "Folder exists
-            	"
+		echo -e "${TextColorGreen}[NOTE   ]${TextColorNone}\t${path_folder_shc} already exists"
 	else
-        	echo "Creating $folder_name folder in /home/$user/
-            	"
-            	mkdir ${final_path}
+		echo -e "${TextColorYellow}[NOTE   ]${TextColorNone}\tCreating ${path_folder_shc}"
+        mkdir ${path_folder_shc}
 fi
 }
 
