@@ -127,19 +127,11 @@ case "${distribution}" in
 	;;
 
 	"debian")
-		if test -f $index_path_debian/index.html;
+		path_file_index="/var/www/html"
+		if test -f ${path_file_index}/index.html;
 			then
-				sudo mv $index_path_debian/index.html $index_path_debian/index.html.bkp
-				echo "index.html renamed to index.html.bkp"
-				sudo cp $site_name $index_path_debian/
-				sudo chown $user:users $index_path_debian/$site_name
-				echo "Index file moved to $index_path_debian/$site_name
-				"
-			else
-				sudo cp $site_name $index_path_debian/
-                                sudo chown $user:users $index_path_debian/$site_name
-                                echo "Index file moved to $index_path_debian/$site_name
-				"
+			sudo mv ${path_file_index}/index.html ${path_file_index}/index.html.bkp
+			echo -e "${TextColorYellow}[NOTE   ]${TextColorNone}\tindex.html was renamed to index.html.bkp"
 		fi
 	;;
 
