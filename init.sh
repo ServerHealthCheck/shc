@@ -1,54 +1,59 @@
 #!/bin/bash
 #author: junglert
+#co-author: amueller
 #mail:
-#date: 04.08.2020
+#date: 18.12.2020
 #license: GPL-3.0
-#summary: bash script that places the index.php and the scripts in the correct places
+#summary: These scripts installes required packages and moves files where they belong
 
-#variables
-user="$USER"
-site_name="index.php"
-folder_name="shc_scripts"
-home_path="/home/$USER"
-final_path="$home_path/$folder_name"
-index_path="/srv/www/htdocs"
-index_path_debian="/var/www/html"
-conffile="/etc/apache2/httpd.conf"
-splitter="-------------------------------------------------"
-package=$(grep ID_LIKE= /etc/os-release | cut -d'=' -f2 | head -1 | sed 's/"//g')
-ip=$(ip a | grep inet | cut -d't' -f2 | grep 192 | cut -d' ' -f2 | cut -d'/' -f1)
+# Output Configuration
+TextColorRed='\033[0;31m'
+TextColorOrange='\033[1;31m'
+TextColorYellow='\033[1;33m'
+TextColorGreen='\033[0;32m'
+TextColorNone='\033[0m'
+# These should be unchanged
+distribution=$(grep ID_LIKE= /etc/os-release | cut -d'=' -f2 | head -1 | sed 's/"//g')
+pkg_required="apache2 apache2-mod_php7"
+ip=$(ip -o route get 0.0.0.1 | cut -d' ' -f7)
+name_site="index.php"
+shc_version="3.2.1"
+# variables
+path_folder_shc="$HOME/.shc"
+path_file_index="/srv/www/htdocs"
+path_file_conf="/etc/apache2/httpd.conf"
+active_scripts="storage_used storage_total temperature mem_used mem_total ip hostname os kernel_version uptime cpu arch"
 
 #functions
-installed_check(){ #check if apache and moudle are installed
-echo "Checking if apache2 and apache2-mod_php7 are installed
-"
-case "$package" in
-	"suse opensuse" | "opensuse suse")
-		zypper se -i apache2 apache2-mod_php7 > /dev/null
+splitter(){
+	echo "-------------------------------------------------"
+}
 
-		if [ $? -ne 0 ]
+1install_packages(){
+echo -e "${TextColorYellow}[NOTE   ]${TextColorNone}\tChecking if apache2 and apache2-mod_php7 are installed"
+case "${distribution}" in
+	"suse opensuse" | "opensuse suse")
+		for package in ${pkg_required}
+		do
+			zypper se -i $package &> /dev/null
+			pkg_installed=$((${pkg_installed} + $?))
+		done
+		if [ ${pkg_installed} -ne 0 ]
 		then
-			echo "Installing apache2 and php7 module"
-			sudo zypper install -y apache2 apache2-mod_php7
-			echo "Adding index.php to /etc/apache2/httpd.conf"
-			sudo sed -in '/DirectoryIndex/s/$/ index.php/' $conffile
-			echo "Adding $USER to group www"
-                        sudo usermod -aG www $USER
-			echo "Starting apache2.service and php7 module"
-			sudo systemctl enable --now apache2.service
-			sudo a2enmod php7
-			echo " "
+			echo -e "${TextColorYellow}[INSTALL]${TextColorNone}\tInstalling required packages"
+			sudo zypper install -y ${pkg_required} &> /dev/null
 		else
-			echo "apache2 and php7 module are already installed"
-			echo "Adding index.php to /etc/apache2/httpd.conf"
-			sudo sed -in '/DirectoryIndex/s/$/ index.php/' $conffile
-			echo "Adding $USER to group www"
-                        sudo usermod -aG www $USER
-			echo "Starting apache2.service and php7 module"
-			sudo systemctl enable --now apache2.service
-			sudo a2enmod php7
-			echo " "
+			echo -e "${TextColorGreen}[NOTE   ]${TextColorNone}\tRequired packages are alread installed"
 		fi	
+		echo -e "${TextColorYellow}[CONFIG ]${TextColorNone}\tAdding index.php to /etc/apache2/httpd.conf"
+		sudo sed -in '/DirectoryIndex/s/$/ index.php/' ${path_file_conf}
+		if ! sudo a2enmod -l | grep -q php7
+		then
+			echo -e "${TextColorYellow}[CONFIG ]${TextColorNone}\tEnabling php module"
+			sudo a2enmod php7
+		else
+			echo -e "${TextColorGreen}[NOTE   ]${TextColorNone}\tPhp module already active"
+		fi
 	;;
 
 	"redhat" | "fedora" | "centos")
@@ -61,102 +66,91 @@ case "$package" in
 
 	"debian" | "ubuntu")
 		sudo apt-get install -y apache2 libapache2-mod-php
-		echo "Starting apache2.service and php7.3 module"
-		sudo systemctl enable --now apache2.service
 		sudo a2enmod php7.3
-		echo " "
 	;;
 
 	*)
-		echo "Cant find any suitable OS
-		"
+		echo -e "${TextColorRed}[ERROR  ]${TextColorNone}\tCant find any suitable OS"
 		exit
-	;;
+		;;
 esac
-}
-
-folder_check(){ #generate folder for the scripts, if not already generated
-echo "Initial check if folder $folder_name exists
-"
-if [ -d "$final_path" ];
-	then
-		echo "Folder exists
-            	"
-	else
-        	echo "Creating $folder_name folder in /home/$user/
-            	"
-            	mkdir ${final_path}
+if ! groups ${USER} | grep -q "www"
+then
+	echo -e "${TextColorYellow}[CONFIG ]${TextColorNone}\tAdding $USER to group www"
+	sudo usermod -aG www ${USER}
+else
+	echo -e "${TextColorGreen}[CONFIG ]${TextColorNone}\t$USER is already part of group www"
+fi
+if systemctl list-unit-files | grep -e "apache2.service" | grep -qe  "enabled"
+then
+	echo -e "${TextColorGreen}[NOTE   ]${TextColorNone}\tWebserver already enabled"
+else
+	echo -e "${TextColorYellow}[CONFIG ]${TextColorNone}\tEnabling webserver"
+	sudo systemctl enable --now apache2.service &> /dev/null
 fi
 }
 
-script_move(){ #move scripts into folder
-echo "Moving scripts into $final_path
-"
-cd shc_scripts/
-cp *.sh $final_path
-cd ..
-echo "Files moved successfully
-"
+2create_folder(){
+if [ -d "${path_folder_shc}" ];
+	then
+		echo -e "${TextColorGreen}[NOTE   ]${TextColorNone}\t${path_folder_shc} already exists"
+	else
+		echo -e "${TextColorYellow}[NOTE   ]${TextColorNone}\tCreating ${path_folder_shc}"
+        mkdir ${path_folder_shc}
+fi
 }
 
-index_move(){ #move index file into correct place
-echo "Moving $site_name into apache2 default place (needs sudo)
-"
-case "$package" in
-	"suse opensuse" | "opensuse suse")
-		sudo cp $site_name $index_path/
-		sudo chown $user:users $index_path/$site_name
-		echo "Index file moved to $index_path/$site_name
-		"
-	;;
-
-	"redhat" | "fedora" | "centos")
-		sudo cp $site_name $index_path/
-		sudo chown $user:users $index_path/$site_name
-		echo "Index file moved to $index_path/$site_name
-		"
-	;;
-
-	"arch")
-		sudo cp $site_name $index_path/
-		sudo chown $user:users $index_path/$site_name
-		echo "Index file moved to $index_path/$site_name
-		"
-	;;
-
-	"debian")
-		if test -f $index_path_debian/index.html;
-			then
-				sudo mv $index_path_debian/index.html $index_path_debian/index.html.bkp
-				echo "index.html renamed to index.html.bkp"
-				sudo cp $site_name $index_path_debian/
-				sudo chown $user:users $index_path_debian/$site_name
-				echo "Index file moved to $index_path_debian/$site_name
-				"
-			else
-				sudo cp $site_name $index_path_debian/
-                                sudo chown $user:users $index_path_debian/$site_name
-                                echo "Index file moved to $index_path_debian/$site_name
-				"
-		fi
-	;;
-
+3copy_files(){
+for script in ${active_scripts}
+do
+	diff "${PWD}/shc_scripts/${script}.sh" "${path_folder_shc}/${script}.sh" &> /dev/null
+	case $? in
+	0)
+		echo -e "${TextColorGreen}[NOTE   ]${TextColorNone}\t${script}.sh is up to date"
+		;;
+	1)
+		cp "${PWD}/shc_scripts/${script}.sh" "${path_folder_shc}/${script}.sh"
+		echo -e "${TextColorYellow}[NOTE   ]${TextColorNone}\t${script}.sh got updated"
+		;;
 	*)
-		echo "Cant find any suitable OS
-		"
-		exit
-	;;
-esac
+		cp "${PWD}/shc_scripts/${script}.sh" "${path_folder_shc}/${script}.sh"
+		echo -e "${TextColorYellow}[NOTE   ]${TextColorNone}\t${script}.sh was created"
+		;;
+	esac
+done
 }
 
-installed_check
-echo $splitter
-folder_check
-echo $splitter
-script_move
-echo $splitter
-index_move
-echo $splitter
-echo "Connect to $ip via your webbrowser
-"
-echo $splitter
+4move_index(){
+echo -e "${TextColorYellow}[NOTE   ]${TextColorNone}\tMoving ${name_site} into apache2 default place"
+case "${distribution}" in
+	"suse opensuse" | "opensuse suse" | "redhat" | "fedora" | "centos" | "arch")
+		# use default path
+		;;
+	"debian")
+		path_file_index="/var/www/html"
+		if test -f ${path_file_index}/index.html;
+		then
+			sudo mv ${path_file_index}/index.html ${path_file_index}/index.html.bkp
+			echo -e "${TextColorYellow}[NOTE   ]${TextColorNone}\tindex.html was renamed to index.html.bkp"
+		fi
+		;;
+	*)
+		echo -e "${TextColorRed}[ERROR  ]${TextColorNone}\tCant find any suitable OS"
+		exit
+		;;
+esac
+sudo cp ${PWD}/webserver_files/${name_site} ${path_file_index}
+sudo chown ${USER}:users ${path_file_index}/${name_site}
+echo -e "${TextColorYellow}[NOTE   ]${TextColorNone}\tIndex file moved to ${path_file_index}/${name_site}"
+}
+
+echo -e "${TextColorGreen}[ S H C ]${TextColorNone}\tStart installation of ServerHealtCheck v${shc_version}"
+# run every function in this script except splitter
+for task in $(declare -F | grep -v splitter | cut -d' ' -f3)
+do
+	splitter
+	$task
+done
+splitter
+echo -e "${TextColorGreen}[ S H C ]${TextColorNone}\tSHC is now available via your webbrowser on http://${ip}!"
+splitter
