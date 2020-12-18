@@ -28,6 +28,7 @@ active_scripts="storage_used storage_total temperature mem_used mem_total ip hos
 splitter(){
 	echo "-------------------------------------------------"
 }
+1install_packages(){
 	"suse opensuse" | "opensuse suse")
 		zypper se -i apache2 apache2-mod_php7 &> /dev/null
 
