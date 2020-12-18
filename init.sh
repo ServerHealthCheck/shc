@@ -6,14 +6,11 @@
 #summary: bash script that places the index.php and the scripts in the correct places
 
 #variables
-user="$USER"
-site_name="index.php"
-folder_name="shc_scripts"
-home_path="/home/$USER"
-final_path="$home_path/$folder_name"
-index_path="/srv/www/htdocs"
-index_path_debian="/var/www/html"
-conffile="/etc/apache2/httpd.conf"
+name_site="index.php"
+path_shc_folder="$HOME/.shc"
+path_index_file="/srv/www/htdocs"
+path_index_file_debian="/var/www/html"
+path_conf_file="/etc/apache2/httpd.conf"
 splitter="-------------------------------------------------"
 package=$(grep ID_LIKE= /etc/os-release | cut -d'=' -f2 | head -1 | sed 's/"//g')
 ip=$(ip a | grep inet | cut -d't' -f2 | grep 192 | cut -d' ' -f2 | cut -d'/' -f1)
