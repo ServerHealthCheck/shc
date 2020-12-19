@@ -84,7 +84,7 @@ then
 	echo -e "${TextColorYellow}[CONFIG ]${TextColorNone}\tAdding $USER to group www"
 	sudo usermod -aG www ${USER}
 else
-	echo -e "${TextColorGreen}[CONFIG ]${TextColorNone}\t$USER is already part of group www"
+	echo -e "${TextColorGreen}[NOTE   ]${TextColorNone}\t$USER is already part of group www"
 fi
 if systemctl list-unit-files | grep -e "apache2.service" | grep -qe  "enabled"
 then
