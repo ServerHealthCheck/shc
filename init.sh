@@ -45,7 +45,7 @@ case "${distribution}" in
 		else
 			echo -e "${TextColorGreen}[NOTE   ]${TextColorNone}\tRequired packages are alread installed"
 		fi
-		if ! grep "DirctoryIndex" ${path_file_conf} | grep -q "index.php"
+		if ! grep "DirectoryIndex" ${path_file_conf} | grep -q "index.php"
 		then
 			echo -e "${TextColorGreen}[NOTE   ]${TextColorNone}\tPhp is already supported by the apache configuration"
 		else
