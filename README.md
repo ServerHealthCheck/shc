@@ -20,7 +20,7 @@
   
   Clone this git-repo: 
   
-	git clone https://github.com/junglert/shc.git
+	git clone https://github.com/ServerHealthCheck/shc.git
             
  
   Go into the shc folder
