@@ -44,9 +44,14 @@ case "${distribution}" in
 			sudo zypper install -y ${pkg_required} &> /dev/null
 		else
 			echo -e "${TextColorGreen}[NOTE   ]${TextColorNone}\tRequired packages are alread installed"
-		fi	
-		echo -e "${TextColorYellow}[CONFIG ]${TextColorNone}\tAdding index.php to /etc/apache2/httpd.conf"
-		sudo sed -in '/DirectoryIndex/s/$/ index.php/' ${path_file_conf}
+		fi
+		if ! grep "DirctoryIndex"	${path_file_conf} | grep -q "index.php"
+		then
+			echo -e "${TextColorGreen}[NOTE   ]${TextColorNone}\tPhp is already supported by the apache configuration"
+		else
+			echo -e "${TextColorYellow}[CONFIG ]${TextColorNone}\tAdding index.php to /etc/apache2/httpd.conf"
+			sudo sed -in '/DirectoryIndex/s/$/ index.php/' ${path_file_conf}
+		fi
 		if ! sudo a2enmod -l | grep -q php7
 		then
 			echo -e "${TextColorYellow}[CONFIG ]${TextColorNone}\tEnabling php module"
