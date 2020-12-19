@@ -43,7 +43,7 @@ case "${distribution}" in
 			echo -e "${TextColorYellow}[INSTALL]${TextColorNone}\tInstalling required packages"
 			sudo zypper install -y ${pkg_required} &> /dev/null
 		else
-			echo -e "${TextColorGreen}[NOTE   ]${TextColorNone}\tRequired packages are alread installed"
+			echo -e "${TextColorGreen}[NOTE   ]${TextColorNone}\tRequired packages are already installed"
 		fi
 		if ! grep "DirectoryIndex" ${path_file_conf} | grep -q "index.php"
 		then
