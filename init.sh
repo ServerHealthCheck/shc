@@ -126,7 +126,6 @@ done
 }
 
 4move_index(){
-echo -e "${TextColorYellow}[NOTE   ]${TextColorNone}\tMoving ${name_site} into apache2 default place"
 case "${distribution}" in
 	"suse opensuse" | "opensuse suse" | "redhat" | "fedora" | "centos" | "arch")
 		# use default path
@@ -144,9 +143,14 @@ case "${distribution}" in
 		exit
 		;;
 esac
-sudo cp ${PWD}/webserver_files/${name_site} ${path_file_index}
-sudo chown ${USER}:users ${path_file_index}/${name_site}
-echo -e "${TextColorYellow}[NOTE   ]${TextColorNone}\tIndex file moved to ${path_file_index}/${name_site}"
+if diff "${PWD}/webserver_files/${name_site}" "${path_file_index}" &> /dev/null
+then
+	echo -e "${TextColorGreen}[NOTE   ]${TextColorNone}\tindex.ph file already up to date"
+else
+	sudo cp ${PWD}/webserver_files/${name_site} ${path_file_index}
+	sudo chown ${USER}:users ${path_file_index}/${name_site}
+	echo -e "${TextColorYellow}[CONFIG ]${TextColorNone}\tindex.php moved to ${path_file_index}/${name_site}"
+fi
 }
 
 echo -e "${TextColorGreen}[ S H C ]${TextColorNone}\tStart installation of ServerHealtCheck v${shc_version}"
