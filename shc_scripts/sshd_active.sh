@@ -1,8 +1,8 @@
 #!/bin/bash
-systemctl status sshd > /dev/null
-if [ $? -ne 0 ]
+#!/bin/bash
+if test systemctl is-active sshd.service
 then
-	echo "not active"
-else
 	echo "active"
+else
+	echo "not active"
 fi
