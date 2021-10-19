@@ -1,2 +1,2 @@
 #!/bin/bash
-hostname
+cat /etc/hostname

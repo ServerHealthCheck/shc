@@ -1,2 +1,5 @@
 #!/bin/bash
-ip a | grep inet | cut -d't' -f2 | grep 192 | cut -d' ' -f2
+for i in $(ip a | grep "^[0-9]" | grep -v " lo:" | awk '{print $2}' | sed 's#:##g')
+do
+    ip address show dev ${i} | grep "inet " | awk '{print $2}'
+done

@@ -1,8 +1,7 @@
 #!/bin/bash
-systemctl status bluetooth > /dev/null
-if [ $? -ne 0 ]
+if test systemctl is-active bluetooth.service
 then
-	echo "not active"
-else
 	echo "active"
+else
+	echo "not active"
 fi

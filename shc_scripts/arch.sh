@@ -1,3 +1,3 @@
 #!/bin/bash
-
-echo $(uname -i)
+LANG=C.UTF-8 
+lscpu | grep "Architecture" | cut -d: -f2 | sed 's#^ *##'
